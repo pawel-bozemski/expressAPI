@@ -1,27 +1,22 @@
 const express = require('express');
 const uniqid = require('uniqid');
+const db = require('./db');
 
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-const db = [
-  { id: 1, author: 'John Doe', text: 'This company is worth every coin!' },
-  { id: 2, author: 'Amanda Doe', text: 'They really know how to make you happy.' },
-  { id: 3, author: 'Mark Doe', text: 'This company is worth every penny!' },
-  { id: 4, author: 'Henry Doe', text: 'This company is best!' },
-];
 
 app.get('/testimonials', (req, res) => {
-  res.json(db);
+  res.json(db.testimonials);
 });
 app.get('/testimonials/random', (req, res) => {
-  res.json(db[Math.floor(Math.random()* db.length)]);
+  res.json(db.testimonials[Math.floor(Math.random()* db.testimonials.length)]);
 });
 
 app.get('/testimonials/:id', (req, res) => {
-  res.json(db.filter(point => point.id == req.params.id));
+  res.json(db.testimonials.filter(point => point.id == req.params.id));
 });
 
 app.post('/testimonials', (req, res) => {
@@ -31,13 +26,13 @@ app.post('/testimonials', (req, res) => {
     author: author,
     text: text,
   };
-  db.push(userData);
-  res.json(db);
+  db.testimonials.push(userData);
+  res.json(db.testimonials);
 });
 
 app.put('/testimonials/:id', (req, res) => {
   const {author, text}  = req.body;
-  db.map(point =>
+  db.testimonials.map(point =>
     point.id === req.params.id ?
     {...point, author: author, text: text}
     :point
@@ -46,13 +41,13 @@ app.put('/testimonials/:id', (req, res) => {
 });
 
 app.delete('/testimonials/:id', (req, res) => {
-  db.filter(point => point.id !== req.params.id);
+  db.testimonials.filter(point => point.id !== req.params.id);
   res.json({ message: 'OK' });
 });
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found...' });
-})
+});
 
 app.listen(8000, () =>
 console.log(`Example app listening on port ${8000}!`));
