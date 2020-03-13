@@ -2,13 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-app.use(cors());
-
 const testimonialRoute = require('./routes/testimonials.routes');
 const concertsRoute = require('./routes/concerts.routes');
 const seatsRoute = require('./routes/seats.routes');
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(cors());
 
 app.use('/api', testimonialRoute);
 app.use('/api', concertsRoute);
