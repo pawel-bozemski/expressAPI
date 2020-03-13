@@ -15,12 +15,13 @@ router.route('/seats/:id').get((req, res) => {
 });
 
 router.route('/seats').post((req, res) => {
-  const {client, seat, email}  = req.body;
+  const {client, seat, email, day}  = req.body;
   const userData = {
     id: uniqid(),
     client: client,
     seat: seat,
     email: email,
+    day: day,
   };
   db.seats.push(userData);
   res.json(db.seats);
@@ -30,7 +31,11 @@ router.route('/seats/:id').put((req, res) => {
   const {client, seat, email} = req.body
   db.seats.map(point =>
     point.id === req.params.id ?
-    {...point, client: client, seat: seat, email:email}
+    {...point,
+      client: client,
+      seat: seat,
+      email: email,
+      day: day,}
     :point
     );
   res.json({ message: 'OK' });

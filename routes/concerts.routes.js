@@ -16,21 +16,30 @@ router.route('/concerts/:id').get((req, res) => {
 });
 
 router.route('/concerts').post((req, res) => {
-  const {performer, genre}  = req.body;
+  const {performer, genre, price, day, image}  = req.body;
   const userData = {
     id: uniqid(),
     performer: performer,
     genre: genre,
+    price: price,
+    day: day,
+    image: image,
   };
   db.concerts.push(userData);
   res.json(db.concerts);
 });
 
 router.route('/concerts/:id').put((req, res) => {
-  const {performer, genre}  = req.body;
+  const {performer, genre, price, day, image}  = req.body;
   db.concerts.map(point =>
     point.id === req.params.id ?
-    {...point, performer: performer, genre: genre}
+    {...point,
+      performer: performer,
+      genre: genre,
+      price: price,
+      day: day,
+      image: image,
+    }
     :point
     );
   res.json({ message: 'OK' });
