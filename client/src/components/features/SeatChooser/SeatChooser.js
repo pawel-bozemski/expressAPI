@@ -19,6 +19,12 @@ class SeatChooser extends React.Component {
     return (seats.some(item => (item.seat === seatId && item.day === chosenDay)));
   }
 
+  freeSeats = () => {
+    const { seats, chosenDay } = this.props;
+
+    return 50 - seats.filter(seat => seat.day === chosenDay).length;
+  };
+
   prepareSeat = (seatId) => {
     const { chosenSeat, updateSeat } = this.props;
     const { isTaken } = this;
@@ -35,6 +41,7 @@ class SeatChooser extends React.Component {
 
     return (
       <div>
+        <h3>Free seats: {this.freeSeats()}/50</h3>
         <h3>Pick a seat</h3>
         <small id="pickHelp" className="form-text text-muted ml-2"><Button color="secondary" /> – seat is already taken</small>
         <small id="pickHelpTwo" className="form-text text-muted ml-2 mb-4"><Button outline color="primary" /> – it's empty</small>
