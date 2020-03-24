@@ -9,13 +9,16 @@ const testimonialRoute = require('./routes/testimonials.routes');
 const concertsRoute = require('./routes/concerts.routes');
 const seatsRoute = require('./routes/seats.routes');
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-app.use(cors());
 app.use((req, res, next) => {
   req.io = io;
   next();
 });
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(cors());
+
+
 
 app.use('/api', testimonialRoute);
 app.use('/api', concertsRoute);
