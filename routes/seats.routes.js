@@ -6,9 +6,6 @@ const router = express.Router();
 router.route('/seats').get((req, res) => {
   res.json(db.seats);
 });
-router.route('/seats/random').get((req, res) => {
-  res.json(db.seats[Math.floor(Math.random()* db.seats.length)]);
-});
 
 router.route('/seats/:id').get((req, res) => {
   res.json(db.seats.filter(point => point.id == req.params.id));
@@ -29,9 +26,8 @@ router.route('/seats').post((req, res) => {
     res.json({ message: 'This seat is already taken...' });
   } else {
     db.seats.push(userData);
+    req.io.emit('seatsUpdated', db.seats);
   }
-  req.io.emit('seatsUpdated', db.seats);
-
 });
 
 router.route('/seats/:id').put((req, res) => {
