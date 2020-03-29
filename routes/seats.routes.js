@@ -1,54 +1,18 @@
 const express = require('express');
-const uniqid = require('uniqid');
-const db = require('../db');
 const router = express.Router();
+const SeatsController = require('../controllers/seats.controller');
 
-router.route('/seats').get((req, res) => {
-  res.json(db.seats);
-});
 
-router.route('/seats/:id').get((req, res) => {
-  res.json(db.seats.filter(point => point.id == req.params.id));
-});
+router.get('/concert', SeatsController.getAll);
 
-router.route('/seats').post((req, res) => {
-  const {client, seat, email, day}  = req.body;
-  const userData = {
-    id: uniqid(),
-    client: client,
-    seat: seat,
-    email: email,
-    day: day,
-  };
+router.get('/concert/:id', SeatsController.getId);
 
-  if(db.seats.some(concert =>
-    concert.day === userData.day && concert.seat === userData.seat)){
-    res.json({ message: 'This seat is already taken...' });
-  } else {
-    db.seats.push(userData);
-    req.io.emit('seatsUpdated', db.seats);
-    res.json({ message: 'OK' });
-  }
-});
+router.post('/concert', SeatsController.post);
 
-router.route('/seats/:id').put((req, res) => {
-  const {client, seat, email} = req.body
-  db.seats.map(point =>
-    point.id === req.params.id ?
-    {...point,
-      client: client,
-      seat: seat,
-      email: email,
-      day: day,}
-    :point
-    );
-  res.json({ message: 'OK' });
-});
+router.put('/concert/:id', SeatsController.put);
 
-router.route('/seats/:id').delete((req, res) => {
-  db.seats.filter(point => point.id !== req.params.id);
-  res.json({ message: 'OK' });
-});
+router.delete('/concert/:id', SeatsController.delete);
+
 
 module.exports = router;
 
