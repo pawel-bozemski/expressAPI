@@ -40,11 +40,11 @@ exports.post = async (req, res) => {
 };
 
 exports.put = async (req, res) => {
-  const { day, seat, client, email } = req.body;  try {
+  const { day, seats, client, email } = req.body;  try {
     const seat = await(Seats.findById(req.params.id));
     if(seat) {
       seat.day = day;
-      seat.seat = seat,
+      seat.seats = seats,
       seat.client = client;
       seat.email = email;
       await seat.save();

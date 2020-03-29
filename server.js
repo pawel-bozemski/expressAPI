@@ -25,9 +25,7 @@ app.use('/api', testimonialRoute);
 app.use('/api', concertsRoute);
 app.use('/api', seatsRoute);
 
-
-mongoose.connect('mongodb://localhost:27017/NewWaveDB', { useNewUrlParser: true });
-const db = mongoose.connection;
+mongoose.connect('mongodb+srv://Pawcio:pawcioapka@cluster0-5lmdn.mongodb.net/newWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });const db = mongoose.connection;
 
 db.once('open', () => {
   console.log('Connected to the database');
