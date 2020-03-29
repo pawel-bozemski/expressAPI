@@ -3,15 +3,15 @@ const router = express.Router();
 const SeatsController = require('../controllers/seats.controller');
 
 
-router.get('/concert', SeatsController.getAll);
+router.get('/seats', SeatsController.getAll);
 
-router.get('/concert/:id', SeatsController.getId);
+router.get('/seats/:id', SeatsController.getId);
 
-router.post('/concert', SeatsController.post);
+router.post('/seats', SeatsController.post);
 
-router.put('/concert/:id', SeatsController.put);
+router.put('/seats/:id', SeatsController.put);
 
-router.delete('/concert/:id', SeatsController.delete);
+router.delete('/seats/:id', SeatsController.delete);
 
 
 module.exports = router;

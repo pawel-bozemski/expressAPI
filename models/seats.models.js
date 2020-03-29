@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 
 const seatsSchema = new mongoose.Schema({

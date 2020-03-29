@@ -34,8 +34,6 @@ exports.getId = async (req, res) => {
   }
 };
 
-
-
 exports.post = async (req, res) => {
   try {
     const {performer, genre, price, day, image}  = req.body;
