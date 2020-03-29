@@ -20,14 +20,23 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join(__dirname, '/client/build')));
 
+app.use('/api', testimonialRoute);
+app.use('/api', concertsRoute);
+app.use('/api', seatsRoute);
+
+
+mongoose.connect('mongodb://localhost:27017/NewWaveDB', { useNewUrlParser: true });
+const db = mongoose.connection;
+
+db.once('open', () => {
+  console.log('Connected to the database');
+});
+db.on('error', err => console.log('Error ' + err));
+
 
 const server = app.listen(process.env.PORT || 8000, () => {
   console.log('Server is running on port: 8000');
 });
-
-app.use('/api', testimonialRoute);
-app.use('/api', concertsRoute);
-app.use('/api', seatsRoute);
 
 // Serve static files from the React app
 
