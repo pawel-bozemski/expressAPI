@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-expressions */
-const uniqid = require('uniqid');
 const Concerts = require('../models/concerts.models');
 
 exports.getAll = async (req, res) => {

@@ -1,7 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-shadow */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-use-before-define */
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -25,9 +21,9 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join(__dirname, '/client/build')));
 
-app.use('/api', testimonialRoute);
-app.use('/api', concertsRoute);
-app.use('/api', seatsRoute);
+app.use('/api/', testimonialRoute);
+app.use('/api/', concertsRoute);
+app.use('/api/', seatsRoute);
 
 mongoose.connect('mongodb+srv://Pawcio:pawcioapka@cluster0-5lmdn.mongodb.net/newWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }); const db = mongoose.connection;
 

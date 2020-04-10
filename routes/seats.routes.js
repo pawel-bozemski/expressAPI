@@ -3,16 +3,14 @@ const express = require('express');
 const router = express.Router();
 const SeatsController = require('../controllers/seats.controller');
 
+router.route('/seats').get(SeatsController.getAll);
 
-router.get('/seats', SeatsController.getAll);
+router.route('/seats/:id').get(SeatsController.getId);
 
-router.get('/seats/:id', SeatsController.getId);
+router.route('/seats').post(SeatsController.post);
 
-router.post('/seats', SeatsController.post);
+router.route('/seats/:id').put(SeatsController.put);
 
-router.put('/seats/:id', SeatsController.put);
-
-router.delete('/seats/:id', SeatsController.delete);
-
+router.route('/seats/:id').delete(SeatsController.delete);
 
 module.exports = router;
