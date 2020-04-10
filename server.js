@@ -1,3 +1,7 @@
+/* eslint-disable no-console */
+/* eslint-disable no-shadow */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-use-before-define */
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -25,12 +29,12 @@ app.use('/api', testimonialRoute);
 app.use('/api', concertsRoute);
 app.use('/api', seatsRoute);
 
-mongoose.connect('mongodb+srv://Pawcio:pawcioapka@cluster0-5lmdn.mongodb.net/newWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });const db = mongoose.connection;
+mongoose.connect('mongodb+srv://Pawcio:pawcioapka@cluster0-5lmdn.mongodb.net/newWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }); const db = mongoose.connection;
 
 db.once('open', () => {
   console.log('Connected to the database');
 });
-db.on('error', err => console.log('Error ' + err));
+db.on('error', (err) => console.log(`Error ${err}`));
 
 const server = app.listen(process.env.PORT || 8000, () => {
   console.log('Server is running on port: 8000');
@@ -39,7 +43,7 @@ const server = app.listen(process.env.PORT || 8000, () => {
 // Serve static files from the React app
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+  res.sendFile(path.join(`${__dirname}/client/build/index.html`));
 });
 
 app.use((req, res) => {
@@ -51,5 +55,3 @@ const io = socket(server);
 io.on('connection', (socket) => {
   console.log('New socket!');
 });
-
-

@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 const SeatsController = require('../controllers/seats.controller');
 
@@ -15,4 +16,3 @@ router.delete('/seats/:id', SeatsController.delete);
 
 
 module.exports = router;
-
