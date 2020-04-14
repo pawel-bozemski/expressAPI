@@ -25,11 +25,12 @@ app.use('/api/', testimonialRoute);
 app.use('/api/', concertsRoute);
 app.use('/api/', seatsRoute);
 
-mongoose.connect('mongodb+srv://Pawcio:pawcioapka@cluster0-5lmdn.mongodb.net/newWaveDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }); const db = mongoose.connection;
+mongoose.connect(`mongodb+srv://${process.env.user}:${process.env.dbPass}@cluster0-5lmdn.mongodb.net/newWaveDB?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true }); const db = mongoose.connection;
 
 db.once('open', () => {
   console.log('Connected to the database');
 });
+
 db.on('error', (err) => console.log(`Error ${err}`));
 
 const server = app.listen(process.env.PORT || 8000, () => {
