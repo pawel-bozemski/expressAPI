@@ -2,6 +2,7 @@
 /* eslint-disable no-sequences */
 const uniqid = require('uniqid');
 const Seats = require('../models/seats.models');
+const sanitize = require('mongo-sanitize');
 
 exports.getAll = async (req, res) => {
   try {
@@ -23,9 +24,10 @@ exports.getId = async (req, res) => {
 
 exports.post = async (req, res) => {
   try {
+    const clean = sanitize(req.body);
     const {
       client, seat, email, day,
-    } = req.body;
+    } = clean;
     const newSeat = new Seats({
       id: uniqid(),
       client,
