@@ -16,7 +16,7 @@
     "mongoose": "^5.9.6",
     "nodemon": "^2.0.2",
     "onchange": "6.1.0",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.4.0",
     "uniqid": "^5.2.0",
     "yarn": "^1.22.4"
   },
